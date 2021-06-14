@@ -1,0 +1,48 @@
+<div class="mx-6">
+    <div
+        id="addTodoListDiv"
+        class="mt-24 flex flex-row justify-between"
+    >
+        <div class="flex flex-wrap items-center">
+            {{#with board}}
+            <h1 class="text-2xl font-bold font-raleway">{{boardName}}</h1>
+            {{/with}}
+        </div>
+        <div class="flex flex-row-reverse items-center">
+            <button id="addTodoListButton" class="btn-save-card h-10">
+                Create List
+            </button>
+            <input id="addTodoListInput" class="input_field h-10" />
+        </div>
+    </div>
+    <div id="root">
+      {{#with board}}
+      {{#each boardLists}}
+      <div class="List" id = "{{_id}}">
+        <input type="hidden" class="id" value="{{_id}}">
+        <button class="deleteButton delButton-card" name="id" value="{{_id}}">X</button>
+        <h2 class="cardTitle"  title="Click to edit">{{listName}}</h2>
+        <input class="input_field" id="cInput{{_id}}"/><button
+          class="btn-save-list"
+          id="to-do-list-button"
+          value="{{_id}}"
+        >
+          Add
+        </button>
+        {{#if cards}}
+        {{#each cards}}
+        <div id="{{_id}}">
+          <div class="card">
+            <p id="cName{{_id}}">{{cardName}}</p>
+            <button class="delButton-list" name="id" value="{{_id}}">X</button>
+          </div>
+          {{>_showListDetailsModal}}
+        </div>
+        {{/each}}
+        {{/if}}
+      </div>
+      {{/each}}
+      {{/with}}
+    </div>
+</div>
+{{>_boardSettingsModal}}
